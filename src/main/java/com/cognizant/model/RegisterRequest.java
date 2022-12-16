@@ -1,6 +1,5 @@
 package com.cognizant.model;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
