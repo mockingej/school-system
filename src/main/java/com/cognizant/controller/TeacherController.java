@@ -8,21 +8,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
 @RequiredArgsConstructor
+@Validated
 public class TeacherController {
 
     private final TeacherService teacherService;
 
     @PostMapping(value = "/teachers", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> save(@Valid @RequestBody EntityRequest entityRequest) {
+    public ResponseEntity<String> save(@RequestBody EntityRequest entityRequest) {
         Teacher teacher = Mapper.teacherMapper(entityRequest);
         teacherService.save(teacher);
         return new ResponseEntity<>("Successfully Created!", HttpStatus.CREATED);
@@ -41,7 +45,7 @@ public class TeacherController {
     }
 
     @GetMapping(value = "/commonstudents", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CommonStudentResponse> deregister(@RequestParam List<String> teacher) {
+    public ResponseEntity<CommonStudentResponse> deregister(@RequestParam(name = "teacher") List<@NotBlank @Email String> teacher) {
         return new ResponseEntity<>(teacherService.retrieveAllCommonStudents(new HashSet<>(teacher)), HttpStatus.OK);
     }
 
