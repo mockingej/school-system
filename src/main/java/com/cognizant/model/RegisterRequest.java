@@ -19,5 +19,5 @@ public class RegisterRequest {
     private String teacher;
 
     @NotEmpty
-    private Set<@Email String> students;
+    private Set<@NotBlank @Email String> students;
 }
