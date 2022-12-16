@@ -10,7 +10,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Builder
 public class RegisterRequest {
 
     @NotBlank
