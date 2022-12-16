@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import java.util.HashSet;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class TeacherController {
     }
 
     @GetMapping(value = "/commonstudents", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CommonStudentResponse> deregister(@RequestParam @Valid List<@Email String> teacher) {
+    public ResponseEntity<CommonStudentResponse> deregister(@RequestParam List<String> teacher) {
         return new ResponseEntity<>(teacherService.retrieveAllCommonStudents(new HashSet<>(teacher)), HttpStatus.OK);
     }
 
