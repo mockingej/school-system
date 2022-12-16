@@ -1,0 +1,5 @@
+1. Install Docker
+2. Run `docker run --name portal-postgres -e POSTGRES_USER=username -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres:14.5`
+3. Go to directory and install dependencies by executing `mvn install`
+4. Execute mvn:spring-boot run
+    or run using IntelliJ IDEA
