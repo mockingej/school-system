@@ -39,7 +39,7 @@ public class TeacherController {
     }
 
     @PostMapping(value = "/deregister", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> deregister(@Valid @RequestBody DeregisterRequest deregisterRequest) {
+    public ResponseEntity<String> deregister(@RequestBody DeregisterRequest deregisterRequest) {
         teacherService.deregisterStudents(deregisterRequest);
         return new ResponseEntity<>("Successfully Deregistered", HttpStatus.OK);
     }
