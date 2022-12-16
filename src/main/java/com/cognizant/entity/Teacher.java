@@ -1,12 +1,17 @@
 package com.cognizant.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Teacher {
     @Id
@@ -14,11 +19,12 @@ public class Teacher {
     private String email;
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "enrolled",
             joinColumns = @JoinColumn(name = "teacher_email"),
             inverseJoinColumns = @JoinColumn(name = "student_email")
     )
+    @Fetch(FetchMode.SELECT)
     private Set<Student> students = new HashSet<>();
 }
